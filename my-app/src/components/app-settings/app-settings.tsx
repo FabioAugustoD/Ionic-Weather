@@ -1,5 +1,6 @@
 import { Component , State, h} from "@stencil/core";
 
+
 @Component({
     tag: "app-settings",
     styleUrl: "app-settings.css"
@@ -35,7 +36,7 @@ export class AppSettings {
                 </ion-radio-group>
 
                 <small>
-                    when using a preset location, the location listyed below
+                    When using a preset location, the location listyed below
                     will be used.
                 </small>
 

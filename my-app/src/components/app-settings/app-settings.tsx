@@ -1,4 +1,5 @@
 import { Component , State, h} from "@stencil/core";
+import { SettingsData } from "../../services/settings-data";
 
 
 @Component({
@@ -6,11 +7,38 @@ import { Component , State, h} from "@stencil/core";
     styleUrl: "app-settings.css"
 })
 
-export class AppSettings {
 
+export class AppSettings {
+    
     @State() useCurrentLocation: boolean = true;
     @State() presetLocation: string = "Adelaide";
     @State() unit: string = "celcius"
+
+    async componentWillLoad() {
+        let [location, unit] = await Promise.all([
+        SettingsData.getLocation(),        
+        SettingsData.getTemperatureUnit()
+        ]);
+        this.useCurrentLocation = location.useCoords;
+        this.presetLocation = location.name;
+        this.unit = unit;
+        }
+    
+    async handleToggleLocation(value) {
+        if (ev.detail.value === "current") {        
+        this.useCurrentLocation = true;
+        } else {
+        this.useCurrentLocation = false;
+        }
+        await SettingsData.setUseCoords(this.useCurrentLocation);
+    } 
+        
+    async handleLocationChange(location) {
+        this.presetLocation = location;
+        await SettingsData.setLocationName(location);
+    }
+            
+
 
     render() {
         return [
@@ -28,10 +56,15 @@ export class AppSettings {
                     You may choose to display weather either from your current location,
                     or a preset location of your choosing.
                 </small>
-                <ion-radio-group value={this.useCurrentLocation ? "current" : "preset"}>
+                <ion-radio-group onIonChange={ev => this.handleToggleLocation(ev.detail.value)} 
+                    value={this.useCurrentLocation ? "current" : "preset"}>
                     <ion-item>
                         <ion-label>Use current location</ion-label>
-                        <ion-radio slot="start" value="preset"/>
+                        <ion-radio slot="start" value="current"/>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Use preset location</ion-label>
+                        <ion-radio slot="start" value="preset" />
                     </ion-item>
                 </ion-radio-group>
 

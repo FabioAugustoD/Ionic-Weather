@@ -24,7 +24,7 @@ export class AppSettings {
         this.unit = unit;
         }
     
-    async handleToggleLocation(value) {
+    async handleToggleLocation(ev) {
         if (ev.detail.value === "current") {        
         this.useCurrentLocation = true;
         } else {
@@ -37,6 +37,12 @@ export class AppSettings {
         this.presetLocation = location;
         await SettingsData.setLocationName(location);
     }
+
+    async handleUnitChange(unit) {
+        this.unit = unit;
+        await SettingsData.setTemperatureUnit(unit);
+        }
+        
             
 
 
@@ -74,7 +80,9 @@ export class AppSettings {
                 </small>
 
                 <ion-item>
-                    <ion-input type="text" value={this.presetLocation}></ion-input>
+                    <ion-input type="text" value={this.presetLocation} onIonInput={(ev: any) => {
+                        this.handleLocationChange(ev.target.value)
+                    }}></ion-input>
                 </ion-item>
 
                 <small>
@@ -83,7 +91,9 @@ export class AppSettings {
                     the weather:
                 </small>
 
-                <ion-radio-group value={this.unit}>
+                <ion-radio-group value={this.unit} 
+                onIonChange={ev => {this.handleUnitChange(ev.detail.value)
+                }}>
                     <ion-item>
                         <ion-label>Celcius</ion-label>
                         <ion-radio value="celcius" slot="start"/>

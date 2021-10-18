@@ -24,8 +24,8 @@ export class AppSettings {
         this.unit = unit;
         }
     
-    async handleToggleLocation(ev) {
-        if (ev.detail.value === "current") {        
+    async handleToggleLocation(ev) {        
+        if (ev === "current") {        
         this.useCurrentLocation = true;
         } else {
         this.useCurrentLocation = false;

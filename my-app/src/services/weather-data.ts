@@ -28,14 +28,11 @@ class WeatherDataController {
             try {
                 if (location.useCoords) {
                     response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?
-                    lat=${location.lat}&lon=${
-                    location.lng
-                    }&APPID=${this.apiKey}`
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&APPID=${this.apiKey}`
                     );
                     if (!response.ok) {
                     throw new Error(response.statusText);
-                    }
+                    }   
                 } else {
                     response = await fetch(                
                         `https://api.openweathermap.org/data/2.5/weather?

@@ -12,7 +12,7 @@ export class AppSettings {
     
     @State() useCurrentLocation: boolean = true;
     @State() presetLocation: string = "Adelaide";
-    @State() unit: string = "celcius"
+    @State() unit: string = "celsius"
 
     async componentWillLoad() {
         let [location, unit] = await Promise.all([
@@ -66,11 +66,11 @@ export class AppSettings {
                     value={this.useCurrentLocation ? "current" : "preset"}>
                     <ion-item>
                         <ion-label>Use current location</ion-label>
-                        <ion-radio slot="start" value="current"/>
+                        <ion-radio color="secondary" slot="start" value="current"/>
                     </ion-item>
                     <ion-item>
                         <ion-label>Use preset location</ion-label>
-                        <ion-radio slot="start" value="preset" />
+                        <ion-radio color="secondary" slot="start" value="preset" />
                     </ion-item>
                 </ion-radio-group>
 
@@ -95,18 +95,18 @@ export class AppSettings {
                 onIonChange={ev => {this.handleUnitChange(ev.detail.value)
                 }}>
                     <ion-item>
-                        <ion-label>Celcius</ion-label>
-                        <ion-radio value="celcius" slot="start"/>
+                        <ion-label>celsius</ion-label>
+                        <ion-radio color="secondary" value="celsius" slot="start"/>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label>Fahrenheit</ion-label>
-                        <ion-radio value="fahrenheit" slot="start"></ion-radio>
+                        <ion-label>Farenheit</ion-label>
+                        <ion-radio color="secondary" value="farenheit" slot="start"></ion-radio>
                     </ion-item>
 
                     <ion-item>
                         <ion-label>Kelvin</ion-label>
-                        <ion-radio value="kelvin" slot="start"/>
+                        <ion-radio color="secondary" value="kelvin" slot="start"/>
                     </ion-item>
                 </ion-radio-group>
                 <small hidden={this.unit != "kelvin"}>Kelvin? Seriously?</small>

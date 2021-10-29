@@ -89,7 +89,8 @@ export class AppHome {
         description.includes("frost")) {
           this.weatherIcon = "snow";
         } else if (description.includes("mist") || 
-        description.includes("overcast clouds")) {
+        description.includes("overcast clouds") ||
+        description.includes("broken clouds")) {
           this.weatherIcon = "cloudy";
         } else if (description.includes("sun") ||
         description.includes("clear ")) {
